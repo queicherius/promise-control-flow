@@ -15,7 +15,7 @@
     "url": "https://github.com/gw2efficiency/async-promises"
   },
   "dependencies": {
-    "await": "^0.2.5"
+    "async": "^1.5.2"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
