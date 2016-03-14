@@ -1,4 +1,3 @@
-require('babel-polyfill')
 const async = require('async')
 
 function parallel (promiseFunctions) {
@@ -11,14 +10,14 @@ function series (promiseFunctions) {
 
 function generatePromise (promiseFunctions, asyncMethod) {
   return new Promise((resolve, reject) => {
-    let callbacks = promiseFunctions
-      .map(promiseFunction =>
-        async (callback) => {
-          try {
-            callback(null, await promiseFunction())
-          } catch (err) {
-            callback(err)
-          }
+    // Generate a function that executes the promise function and
+    // calls back in a way that the async library requires
+    let callbacks = promiseFunctions.map(promiseFunction =>
+        (callback) => {
+          promiseFunction().then(
+            data => callback(null, data),
+            err => callback(err)
+          )
         }
       )
 
