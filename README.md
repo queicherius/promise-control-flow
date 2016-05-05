@@ -6,6 +6,8 @@
 > Wrapping promises with the [async](https://github.com/caolan/async) library. This enables you to
 > pass promise-generating functions to the `parallel` and `series` methods and returns a promise instead of having to specify a callback
 
+*This is part of [gw2efficiency](https://gw2efficiency.com). Please report all issues in [the central repository](https://github.com/gw2efficiency/issues/issues).*
+
 ## Install
 
 ```
