@@ -1,6 +1,6 @@
 {
   "name": "gw2e-async-promises",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Wrapping promises with the async library (parallel/series)",
   "main": "./build/index.js",
   "scripts": {
