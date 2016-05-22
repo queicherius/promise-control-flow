@@ -28,6 +28,20 @@ describe('async-promises', () => {
     expect(timestamps[2] - timestamps[1]).to.be.below(20)
   })
 
+  it('can work on promises in parallel with a limit', async () => {
+    let promises = [
+      timeoutPromise(100),
+      timeoutPromise(100),
+      timeoutPromise(100),
+      timeoutPromise(100)
+    ]
+
+    let timestamps = await module.parallel(promises, 2)
+    expect(timestamps[1] - timestamps[0]).to.be.below(20)
+    expect(timestamps[2] - timestamps[1]).to.be.above(100)
+    expect(timestamps[3] - timestamps[2]).to.be.below(20)
+  })
+
   it('can work on promises in series', async () => {
     let promises = [
       timeoutPromise(100),
