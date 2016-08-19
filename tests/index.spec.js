@@ -24,8 +24,8 @@ describe('async-promises', () => {
     ]
 
     let timestamps = await module.parallel(promises)
-    expect(timestamps[1] - timestamps[0]).to.be.below(20)
-    expect(timestamps[2] - timestamps[1]).to.be.below(20)
+    expect(timestamps[1] - timestamps[0]).to.be.below(25)
+    expect(timestamps[2] - timestamps[1]).to.be.below(25)
   })
 
   it('can work on promises in parallel with a limit', async () => {
@@ -37,9 +37,9 @@ describe('async-promises', () => {
     ]
 
     let timestamps = await module.parallel(promises, 2)
-    expect(timestamps[1] - timestamps[0]).to.be.below(20)
-    expect(timestamps[2] - timestamps[1]).to.be.above(100)
-    expect(timestamps[3] - timestamps[2]).to.be.below(20)
+    expect(timestamps[1] - timestamps[0]).to.be.below(25)
+    expect(timestamps[2] - timestamps[1]).to.be.above(95)
+    expect(timestamps[3] - timestamps[2]).to.be.below(25)
   })
 
   it('can work on promises in series', async () => {
@@ -50,8 +50,8 @@ describe('async-promises', () => {
     ]
 
     let timestamps = await module.series(promises)
-    expect(timestamps[1] - timestamps[0]).to.be.above(90)
-    expect(timestamps[2] - timestamps[1]).to.be.above(90)
+    expect(timestamps[1] - timestamps[0]).to.be.above(95)
+    expect(timestamps[2] - timestamps[1]).to.be.above(95)
   })
 
   it('can catch the promise error for parallel', async () => {
