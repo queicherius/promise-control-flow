@@ -103,4 +103,44 @@ describe('async-promises', () => {
       three: 'three-result'
     })
   })
+
+  it('supports silencing errors for parallel', async () => {
+    const promiseFunc = async (x) => x
+    const promiseError = async () => {
+      throw new Error('Oh boy')
+    }
+
+    let promises = {
+      one: () => promiseFunc('one-result'),
+      two: () => promiseError(),
+      three: () => promiseFunc('three-result')
+    }
+
+    let result = await module.parallel(promises, false, true)
+    expect(result).to.deep.equal({
+      one: 'one-result',
+      two: null,
+      three: 'three-result'
+    })
+  })
+
+  it('supports silencing errors for series', async () => {
+    const promiseFunc = async (x) => x
+    const promiseError = async () => {
+      throw new Error('Oh boy')
+    }
+
+    let promises = [
+      () => promiseFunc('one-result'),
+      () => promiseError(),
+      () => promiseFunc('three-result')
+    ]
+
+    let result = await module.series(promises, true)
+    expect(result).to.deep.equal([
+      'one-result',
+      null,
+      'three-result'
+    ])
+  })
 })

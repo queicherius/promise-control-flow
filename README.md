@@ -32,12 +32,16 @@ let promiseArray = [
 // Await
 let results = await async.parallel(promiseArray)
 let results = await async.parallel(promiseArray, limitOfParallelTasks)
+let results = await async.parallel(promiseArray, limitOfParallelTasks, boolSilenceErrors)
 let results = await async.series(promiseArray)
+let results = await async.series(promiseArray, boolSilenceErrors)
 
 // Promises
 async.parallel(promiseArray).then(results => console.log(results))
 async.parallel(promiseArray, limitOfParallelTasks).then(results => console.log(results))
+async.parallel(promiseArray, limitOfParallelTasks, boolSilenceErrors).then(results => console.log(results))
 async.series(promiseArray).then(results => console.log(results))
+async.series(promiseArray, boolSilenceErrors).then(results => console.log(results))
 ```
 
 ## Tests

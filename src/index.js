@@ -1,18 +1,18 @@
 const async = require('async')
 
-function parallel (promiseFunctions, limit = false) {
+function parallel (promiseFunctions, limit = false, silenceErrors = false) {
   const asyncFunction = !limit
     ? async.parallel
     : (tasks, callback) => async.parallelLimit(tasks, limit, callback)
 
-  return generatePromise(promiseFunctions, asyncFunction)
+  return generatePromise(promiseFunctions, asyncFunction, silenceErrors)
 }
 
-function series (promiseFunctions) {
-  return generatePromise(promiseFunctions, async.series)
+function series (promiseFunctions, silenceErrors = false) {
+  return generatePromise(promiseFunctions, async.series, silenceErrors)
 }
 
-function generatePromise (promiseFunctions, asyncMethod) {
+function generatePromise (promiseFunctions, asyncMethod, silenceErrors) {
   return new Promise((resolve, reject) => {
     // Generate a function that executes the promise function and
     // calls back in a way that the async library requires
@@ -22,7 +22,7 @@ function generatePromise (promiseFunctions, asyncMethod) {
       promiseFunctions[i] = (asyncCallback) => {
         promiseFunction()
           .then(data => asyncCallback(null, data))
-          .catch(err => asyncCallback(err))
+          .catch(err => silenceErrors ? asyncCallback(null, null) : asyncCallback(err))
       }
     }
 
