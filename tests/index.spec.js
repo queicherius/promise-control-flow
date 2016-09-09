@@ -87,4 +87,20 @@ describe('async-promises', () => {
 
     expect(err.message).to.equal('Error')
   })
+
+  it('can work on promises as an object', async () => {
+    const promiseFunc = async (x) => x
+    let promises = {
+      one: () => promiseFunc('one-result'),
+      two: () => promiseFunc('two-result'),
+      three: () => promiseFunc('three-result')
+    }
+
+    let result = await module.parallel(promises)
+    expect(result).to.deep.equal({
+      one: 'one-result',
+      two: 'two-result',
+      three: 'three-result'
+    })
+  })
 })

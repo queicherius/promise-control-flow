@@ -16,18 +16,18 @@ function generatePromise (promiseFunctions, asyncMethod) {
   return new Promise((resolve, reject) => {
     // Generate a function that executes the promise function and
     // calls back in a way that the async library requires
-    let tasks = promiseFunctions.map(promiseFunction =>
-      (callback) =>
-        promiseFunction().then(
-          data => callback(null, data),
-          err => callback(err)
-        )
-    )
+    for (let i in promiseFunctions) {
+      let promiseFunction = promiseFunctions[i]
 
-    asyncMethod(tasks, (err, results) => {
-      if (err) {
-        return reject(err)
+      promiseFunctions[i] = (asyncCallback) => {
+        promiseFunction()
+          .then(data => asyncCallback(null, data))
+          .catch(err => asyncCallback(err))
       }
+    }
+
+    asyncMethod(promiseFunctions, (err, results) => {
+      if (err) return reject(err)
       resolve(results)
     })
   })
