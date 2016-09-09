@@ -19,6 +19,10 @@ function generatePromise (promiseFunctions, asyncMethod, silenceErrors) {
     for (let i in promiseFunctions) {
       let promiseFunction = promiseFunctions[i]
 
+      if (typeof promiseFunction !== 'function') {
+        return reject(new Error('One of the supplied promise functions is not a function'))
+      }
+
       promiseFunctions[i] = (asyncCallback) => {
         promiseFunction()
           .then(data => asyncCallback(null, data))

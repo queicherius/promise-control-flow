@@ -143,4 +143,19 @@ describe('async-promises', () => {
       'three-result'
     ])
   })
+
+  it('throws an error for invalid promise functions', async () => {
+    let promises = [
+      false
+    ]
+
+    let err
+    try {
+      await module.parallel(promises)
+    } catch (e) {
+      err = e
+    }
+
+    expect(err.message).to.equal('One of the supplied promise functions is not a function')
+  })
 })
