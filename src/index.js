@@ -1,6 +1,9 @@
-const async = require('async')
+import async from 'async'
 
-function parallel (promiseFunctions, limit = false, silenceErrors = false) {
+export default {parallel, series}
+
+// Work on the tasks in parallel, with a optional concurrency limit
+export function parallel (promiseFunctions, limit = false, silenceErrors = false) {
   const asyncFunction = !limit
     ? async.parallel
     : (tasks, callback) => async.parallelLimit(tasks, limit, callback)
@@ -8,10 +11,12 @@ function parallel (promiseFunctions, limit = false, silenceErrors = false) {
   return generatePromise(promiseFunctions, asyncFunction, silenceErrors)
 }
 
-function series (promiseFunctions, silenceErrors = false) {
+// Work on the tasks in series (one by one)
+export function series (promiseFunctions, silenceErrors = false) {
   return generatePromise(promiseFunctions, async.series, silenceErrors)
 }
 
+// Wrap the async library with a promise, and convert the promise functions into callbacks
 function generatePromise (promiseFunctions, asyncMethod, silenceErrors) {
   return new Promise((resolve, reject) => {
     // Generate a function that executes the promise function and
@@ -36,5 +41,3 @@ function generatePromise (promiseFunctions, asyncMethod, silenceErrors) {
     })
   })
 }
-
-module.exports = {parallel, series}

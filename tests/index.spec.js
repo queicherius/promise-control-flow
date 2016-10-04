@@ -1,6 +1,6 @@
 /* eslint-env node, mocha */
-const expect = require('chai').expect
-const module = require('../src/index.js')
+import {expect} from 'chai'
+import module from '../src/index.js'
 
 function timeoutPromise (ms, throwError = false) {
   return () => new Promise((resolve, reject) => {
@@ -15,7 +15,7 @@ function timeoutPromise (ms, throwError = false) {
   })
 }
 
-describe('async-promises', () => {
+describe('promise-flowcontrol', () => {
   it('can work on promises in parallel', async () => {
     let promises = [
       timeoutPromise(100),
