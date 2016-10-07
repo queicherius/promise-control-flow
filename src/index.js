@@ -1,19 +1,21 @@
-import async from 'async'
+import asyncParallel from 'async/parallel'
+import asyncSeries from 'async/series'
+import asyncParallelLimit from 'async/parallelLimit'
 
 export default {parallel, series}
 
 // Work on the tasks in parallel, with a optional concurrency limit
 export function parallel (promiseFunctions, limit = false, silenceErrors = false) {
   const asyncFunction = !limit
-    ? async.parallel
-    : (tasks, callback) => async.parallelLimit(tasks, limit, callback)
+    ? asyncParallel
+    : (tasks, callback) => asyncParallelLimit(tasks, limit, callback)
 
   return generatePromise(promiseFunctions, asyncFunction, silenceErrors)
 }
 
 // Work on the tasks in series (one by one)
 export function series (promiseFunctions, silenceErrors = false) {
-  return generatePromise(promiseFunctions, async.series, silenceErrors)
+  return generatePromise(promiseFunctions, asyncSeries, silenceErrors)
 }
 
 // Wrap the async library with a promise, and convert the promise functions into callbacks
