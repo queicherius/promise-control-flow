@@ -15,7 +15,7 @@ function timeoutPromise (ms, throwError = false) {
   })
 }
 
-describe('promise-flowcontrol', () => {
+describe('promise-control-flow', () => {
   it('can work on promises in parallel', async () => {
     let promises = [
       timeoutPromise(100),
