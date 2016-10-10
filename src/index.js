@@ -1,4 +1,5 @@
 import concurrent from 'contra/concurrent'
+import isFunction from 'is-function'
 
 export default {series, parallel}
 
@@ -21,7 +22,7 @@ function generatePromise (promiseFunctions, contraMethod, silenceErrors) {
     for (let i in promiseFunctions) {
       let promiseFunction = promiseFunctions[i]
 
-      if (typeof promiseFunction !== 'function') {
+      if (!isFunction(promiseFunction)) {
         return reject(new Error('One of the supplied promise functions is not a function'))
       }
 
