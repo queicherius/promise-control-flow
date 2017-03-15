@@ -19,6 +19,6 @@
     "is-function": "^1.0.1"
   },
   "devDependencies": {
-    "abc-environment": "^1.0.5"
+    "abc-environment": "^2.0.0"
   }
 }
