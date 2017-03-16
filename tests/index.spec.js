@@ -9,7 +9,7 @@ function timeoutPromise (ms, throwError = false) {
       if (!throwError) {
         resolve(x)
       } else {
-        reject({message: 'Error'})
+        reject(new Error('Error'))
       }
     }, ms)
   })
