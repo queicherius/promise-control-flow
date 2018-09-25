@@ -1,6 +1,6 @@
 {
   "name": "promise-control-flow",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Wrapping the contra library to support promises (parallel/series)",
   "main": "./src/index.js",
   "scripts": {
