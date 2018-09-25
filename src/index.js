@@ -1,15 +1,15 @@
-import concurrent from 'contra/concurrent'
-import isFunction from 'is-function'
+const concurrent = require('contra/concurrent')
+const isFunction = require('is-function')
 
-export default {series, parallel}
+module.exports = { series, parallel }
 
 // Work on the tasks in series (one by one)
-export function series (promiseFunctions, silenceErrors = false) {
+function series (promiseFunctions, silenceErrors = false) {
   return parallel(promiseFunctions, 1, silenceErrors)
 }
 
 // Work on the tasks in parallel, with a optional concurrency limit
-export function parallel (promiseFunctions, limit = Infinity, silenceErrors = false) {
+function parallel (promiseFunctions, limit = Infinity, silenceErrors = false) {
   const contraMethod = (tasks, callback) => concurrent(tasks, limit, callback)
   return generatePromise(promiseFunctions, contraMethod, silenceErrors)
 }

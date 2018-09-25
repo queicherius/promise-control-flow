@@ -18,7 +18,7 @@ This module can be used for Node.js as well as browsers using [Browserify](https
 ### Basic usage
 
 ```js
-import flow from 'promise-control-flow'
+const flow = require('promise-control-flow')
 
 // Note: promisesArray expects to be built out of *functions*
 // that return promises, because else the promises start 
