@@ -1,7 +1,7 @@
 # promise-control-flow
 
 [![Build Status](https://img.shields.io/travis/queicherius/promise-control-flow.svg?style=flat-square)](https://travis-ci.org/queicherius/promise-control-flow)
-[![Coverage Status](https://img.shields.io/codecov/c/github/queicherius/promise-control-flow/master.svg?style=flat-square)](https://codecov.io/github/queicherius/promise-control-flow)
+[![Coverage Status](https://img.shields.io/codecov/c/github/queicherius/promise-control-flow/master.svg?style=flat-square)](https://codecov.io/github/queicherius/promise-control-flow) [![Greenkeeper badge](https://badges.greenkeeper.io/queicherius/promise-control-flow.svg)](https://greenkeeper.io/)
 
 > Wrapping the [contra](https://github.com/bevacqua/contra) library to support working with promises. This enables you to pass promise-generating functions to the `parallel` and `series` methods and returns a promise instead of having to specify a callback
 
